@@ -10,7 +10,7 @@ package com.ricktoboz.omgbugz;
 
 import info.gridworld.actor.Bug;
 
-public class CircleBug extends Bug{
+public class CircleBug extends Bug {
     private int steps;
     private int sideLength;
     private int sides;
@@ -25,20 +25,38 @@ public class CircleBug extends Bug{
     }
 
     public void act() {
-        if (sides == 3){return;}
-        if (steps < sideLength && canMove() == false){
-            return;}
-        else if (steps < sideLength){
-            move();
-            steps++;}
-        else if (sides == 0) {turn(); turn(); turn(); sides++; steps = 0; return;}
-        else if (sides == 1) {turn(); turn(); turn(); turn(); turn(); sides++; steps = 0; return;}
-        else if (sides == 2) {sides++; return;}
+        if (sides == 3) {
+            return;
         }
+        if (steps < sideLength && canMove() == false) {
+            return;
+        } else if (steps < sideLength) {
+            move();
+            steps++;
+        } else if (sides == 0) {
+            turn();
+            turn();
+            turn();
+            sides++;
+            steps = 0;
+            return;
+        } else if (sides == 1) {
+            turn();
+            turn();
+            turn();
+            turn();
+            turn();
+            sides++;
+            steps = 0;
+            return;
+        } else if (sides == 2) {
+            sides++;
+            return;
+        }
+    }
 
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
     }
 }

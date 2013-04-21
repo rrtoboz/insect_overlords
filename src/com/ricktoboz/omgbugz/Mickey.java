@@ -14,21 +14,23 @@ public class Mickey extends Canvas {
     }
 
     public void mickey(Graphics g, Rectangle bb) {
-        if (bb.width < 3) {return;}
+        if (bb.width < 3) {
+            return;
+        }
 
         boxOval(g, bb);
 
-        int dx = bb.width/2;
-        int dy = bb.height/2;
+        int dx = bb.width / 2;
+        int dy = bb.height / 2;
         Rectangle half = new Rectangle(bb.x, bb.y, dx, dy);
 
-        half.translate((-half.width/2), (-half.width/2));
+        half.translate((-half.width / 2), (-half.width / 2));
         boxOval(g, half);
-        mickey (g, half);
+        mickey(g, half);
 
-        half.translate((half.width*2), 0);
+        half.translate((half.width * 2), 0);
         boxOval(g, half);
-        mickey (g, half);
+        mickey(g, half);
 
 
         //half.setBounds(half.x, half.y, (half.width/2), (half.height/2));

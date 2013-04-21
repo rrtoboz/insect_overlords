@@ -7,6 +7,7 @@ package com.ricktoboz.omgbugz;
  * Time: 11:31 AM
  * To change this template use File | Settings | File Templates.
  */
+
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Color;

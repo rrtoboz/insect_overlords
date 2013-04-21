@@ -24,16 +24,14 @@ public class BoxBug extends Bug {
         if (steps < sideLength && canMove()) {
             move();
             steps++;
-        }
-        else {
+        } else {
             turn();
             turn();
             steps = 0;
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
 
     }
 }

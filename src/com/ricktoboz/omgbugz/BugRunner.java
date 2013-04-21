@@ -19,7 +19,9 @@ import info.gridworld.actor.Actor;
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Bug;
 import info.gridworld.actor.Rock;
+
 import java.awt.Color;
+
 import info.gridworld.grid.UnboundedGrid;
 import info.gridworld.world.World;
 import info.gridworld.grid.Location;
@@ -34,10 +36,8 @@ import com.ricktoboz.omgbugz.CircleBug;
  * BoxBugRunner (in the boxBug folder) for an example. <br />
  * This class is not tested on the AP CS A and AB exams.
  */
-public class BugRunner
-{
-    public static void main(String[] args)
-    {
+public class BugRunner {
+    public static void main(String[] args) {
         ActorWorld world = new ActorWorld();
         CircleBug alice = new CircleBug(6);
         alice.setColor(Color.ORANGE);
@@ -49,36 +49,59 @@ public class BugRunner
     }
 
     public static void movebug(Bug b) {
-    Boolean a = b.canMove();
-    if (a == true) {
-    b.move();
+        Boolean a = b.canMove();
+        if (a == true) {
+            b.move();
         }
-}
-    public static void randomBug (Bug b, int n){
-    Double c = (StrictMath.random() + StrictMath.random());
-    if (c <= 0.5) {movebug(b);}
-        else if (c<= 1.0) {b.turn(); b.turn(); movebug(b);}
-            else if (c <= 1.5) {b.turn(); b.turn(); b.turn(); b.turn(); movebug(b);}
-                else {b.turn(); b.turn(); b.turn(); b.turn(); b.turn(); b.turn(); movebug(b);}
-    if (n == 0) {} else {randomBug(b, (n - 1));
-    }
-}
-    public static void colorBug (Bug b, Color c){
-    int d = b.getLocation().getCol();
-    int e = b.getLocation().getRow();
-    System.out.println("cyanBug's location is (" + d + ", " + e + ").");
-    b.setColor(c);
     }
 
-    public static void makeBugs (ActorWorld a, int n){
-    if (n == 0) {} else {
-    Bug b = new Bug();
-    a.add(b);
+    public static void randomBug(Bug b, int n) {
+        Double c = (StrictMath.random() + StrictMath.random());
+        if (c <= 0.5) {
+            movebug(b);
+        } else if (c <= 1.0) {
+            b.turn();
+            b.turn();
+            movebug(b);
+        } else if (c <= 1.5) {
+            b.turn();
+            b.turn();
+            b.turn();
+            b.turn();
+            movebug(b);
+        } else {
+            b.turn();
+            b.turn();
+            b.turn();
+            b.turn();
+            b.turn();
+            b.turn();
+            movebug(b);
+        }
+        if (n == 0) {
+        } else {
+            randomBug(b, (n - 1));
+        }
+    }
+
+    public static void colorBug(Bug b, Color c) {
         int d = b.getLocation().getCol();
         int e = b.getLocation().getRow();
-    Color c = new Color(d, 0, e);
-    b.setColor(c);
-    makeBugs (a, (n - 1));
-
+        System.out.println("cyanBug's location is (" + d + ", " + e + ").");
+        b.setColor(c);
     }
-}}
+
+    public static void makeBugs(ActorWorld a, int n) {
+        if (n == 0) {
+        } else {
+            Bug b = new Bug();
+            a.add(b);
+            int d = b.getLocation().getCol();
+            int e = b.getLocation().getRow();
+            Color c = new Color(d, 0, e);
+            b.setColor(c);
+            makeBugs(a, (n - 1));
+
+        }
+    }
+}

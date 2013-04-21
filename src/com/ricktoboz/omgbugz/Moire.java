@@ -17,18 +17,18 @@ import javax.swing.JFrame;
 
 public class Moire extends Canvas {
 
- //   public void paint(Graphics g) {
- //       int i = 90;
- //       while (i < getWidth()) {
- //           g.drawOval (((400 - i)/2), ((400 - i)/2), i, i);
- //           i = i + 10;
- //       }
- //   }
+    //   public void paint(Graphics g) {
+    //       int i = 90;
+    //       while (i < getWidth()) {
+    //           g.drawOval (((400 - i)/2), ((400 - i)/2), i, i);
+    //           i = i + 10;
+    //       }
+    //   }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         System.out.println("Your bounds are: " + g.getClipBounds());
         int i = 0;
-        while (i < 400){
+        while (i < 400) {
             g.drawLine(i, 0, (400 - i), 400);
             g.drawLine(0, i, 400, (400 - i));
             i = i + 10;
