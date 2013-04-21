@@ -14,13 +14,11 @@ public class CircleBug extends Bug {
     private int steps;
     private int sideLength;
     private int sides;
-    public boolean doneMoving;
 
     public CircleBug(int length) {
         steps = 0;
         sideLength = length;
         sides = 0;
-        doneMoving = false;
         setDirection(90);
     }
 
@@ -53,11 +51,6 @@ public class CircleBug extends Bug {
             sides++;
             return;
         }
-    }
-
-
-    public static void main(String[] args) {
-
     }
 }
 
