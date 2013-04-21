@@ -21,7 +21,7 @@ public class DancingBug extends Bug {
     }
 
     public void act() {
-        if (whichStepAreWeOn > danceArray.length) {
+        if ((whichStepAreWeOn + 1) > danceArray.length) {
             whichStepAreWeOn = 0;
             return;
         } else {
