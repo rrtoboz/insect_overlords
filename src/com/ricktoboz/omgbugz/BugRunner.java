@@ -39,11 +39,10 @@ import com.ricktoboz.omgbugz.CircleBug;
 public class BugRunner {
     public static void main(String[] args) {
         ActorWorld world = new ActorWorld();
-        CircleBug alice = new CircleBug(6);
+        int[] anArray = {1, 2, 3, 4, 5, 6};
+        DancingBug alice = new DancingBug(anArray);
         alice.setColor(Color.ORANGE);
-        CircleBug bob = new CircleBug(3);
         world.add(new Location(7, 8), alice);
-        world.add(new Location(5, 5), bob);
         world.show();
 
     }
