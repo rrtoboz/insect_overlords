@@ -13,7 +13,6 @@ import info.gridworld.actor.Bug;
 public class DancingBug extends Bug {
 
     private int[] danceArray;
-    private int turns = 0;
     private int whichStepAreWeOn = 0;
 
     public DancingBug(int[] x) {
@@ -21,6 +20,7 @@ public class DancingBug extends Bug {
     }
 
     public void act() {
+        int turns = 0;
         if ((whichStepAreWeOn + 1) > danceArray.length) {
             whichStepAreWeOn = 0;
             return;
