@@ -41,8 +41,10 @@ public class BugRunner {
         ActorWorld world = new ActorWorld();
         int[] anArray = {1, 2, 3, 4, 5, 6};
         DancingBug alice = new DancingBug(anArray);
+        DancingBug apple = new DancingBug(anArray);
         alice.setColor(Color.ORANGE);
         world.add(new Location(7, 8), alice);
+        world.add(apple);
         world.show();
 
     }
