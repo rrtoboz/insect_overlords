@@ -19,14 +19,13 @@ package com.ricktoboz.omgbugz;
  */
 
 import info.gridworld.actor.Actor;
-import info.gridworld.actor.Bug;
 import info.gridworld.actor.Flower;
 import info.gridworld.grid.Location;
 
 /**
  *
  */
-public class MyTermite extends Termite {
+public class LangtonTermite extends Termite {
     Flower flower;
 
     Flower dropped = null;
@@ -39,18 +38,16 @@ public class MyTermite extends Termite {
         if (getGrid() == null)
             return;
 
-        if (seeFlower() && hasFlower()) {
+        if (hasFlower()) {
+            turn(-45);
             dropFlower();
-        } else if (seeFlower() && (hasFlower() == false)) {
+            move();
+        } else if (hasFlower() == false) {
+            turn(45);
             pickUpFlower();
-        }
-
-        if (canMove()) {
             move();
         }
-        randomTurn();
     }
-
 
     /*
      * Turns left or right 45 degrees at random.
