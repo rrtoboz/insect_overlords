@@ -30,6 +30,7 @@ public class LangtonTermite extends Termite {
 
     Flower dropped = null;
     Location dropLoc = null;
+    boolean BlackSquare = false;
 
     /*
      * Does that thing that termites do. 
@@ -38,13 +39,21 @@ public class LangtonTermite extends Termite {
         if (getGrid() == null)
             return;
 
-        if (hasFlower()) {
+        if (BlackSquare == true) {
             turn(-45);
+        }
+
+        if (BlackSquare == false) {
+            createFlower();
             dropFlower();
-            move();
-        } else if (hasFlower() == false) {
             turn(45);
-            pickUpFlower();
+        }
+
+        if (seeFlower()) {
+            BlackSquare = true;
+            move();
+        } else if (seeFlower() == false) {
+            BlackSquare = false;
             move();
         }
     }
@@ -73,7 +82,7 @@ public class LangtonTermite extends Termite {
      */
     public boolean canMove() {
         Location next = getNextLocation();
-        return (isValid(next) && getNeighbor() == null);
+        return (isValid(next));
     }
 
 
