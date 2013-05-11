@@ -10,10 +10,17 @@ package com.ricktoboz.omgbugz;
 public class ChapterTwelve {
     public static void main(String[] args) {
         int[] test = new int[10];
-        for (int i = 0; i < test.length; i++) {
-            test[i] = i;
-        }
-        System.out.println("The max value is: " + maxInRange(test, 1, 4));
+        test[0] = 347;
+        test[1] = 2;
+        test[2] = 1001;
+        test[3] = 488;
+        test[4] = 99;
+        test[5] = 13;
+        test[6] = 656;
+        test[7] = 991;
+        test[8] = 34;
+        test[9] = 111;
+        System.out.println("The max value is: " + maxInRange(test, 1, 300));
     }
 
     public static int[] cloneArray(int[] a) {
@@ -88,81 +95,90 @@ public class ChapterTwelve {
 
     public static int maxInRange(int[] range, int lowIndex, int highIndex) {
         if (range.length == 0) {
-            {
-                System.out.println("There are no numbers in range.");
-                return -2147483648;
-            }
-            if (range.length == 1) {
-                return range[0];
-            }
-            int candidates = 0;
-            for (int i = 0; i < range.length; i++) {
-                if (range[i] <= highIndex && range[i] >= lowIndex) {
-                    candidates++;
-                }
-            }
-            if (candidates == 2) {
-                int[] bracket = new int[2];
-                int tracker = 0;
-                for (int i = 0; i < range.length; i++) {
-                    if (range[i] <= highIndex && range[i] >= lowIndex) {
-                        bracket[tracker] = range[i];
-                        tracker++;
-                    }
-                }
-                int winnerof2 = 0;
-                for (int j = 0; j < bracket.length; j++) {
-                    if (range[j] >= range[j + 1]) {
-                        winnerof2 = range[j];
-                    } else {
-                        winnerof2 = range[j + 1];
-                    }
-                }
-                return winnerof2;
-            }
-            if ((candidates % 2) == 0) {
-                int[] bracket1 = new int[(candidates / 2)];
-                int[] bracket2 = new int[(candidates / 2)];
-                int tracker = 0;
-                for (int i = 0; i == (candidates / 2); i++) {
-                    if (range[i] <= highIndex && range[i] >= lowIndex) {
-                        bracket1[tracker] = range[i];
-                        tracker++;
-                    }
-                }
-                tracker = 0;
-                for (int j = 0; j == (candidates / 2); j++) {
-                    if (range[j + (candidates / 2)] <= highIndex && range[j + (candidates / 2)] >= lowIndex) {
-                        bracket2[tracker] = range[j + (candidates / 2)];
-                        tracker++;
-                    }
-                }
-                if (maxInRange(bracket1, lowIndex, highIndex) >= (maxInRange(bracket2, lowIndex, highIndex))) {
-                    return maxInRange(bracket1, lowIndex, highIndex);
-                } else return maxInRange(bracket2, lowIndex, highIndex);
-            }
-            if ((candidates % 2) != 0) {
-                int[] bracket1 = new int[(candidates / 2)];
-                int[] bracket2 = new int[(candidates / 2) + 1];
-                int tracker = 0;
-                for (int i = 0; i == (candidates / 2); i++) {
-                    if (range[i] <= highIndex && range[i] >= lowIndex) {
-                        bracket1[tracker] = range[i];
-                        tracker++;
-                    }
-                }
-                tracker = 0;
-                for (int j = 0; j == (candidates / 2); j++) {
-                    if (range[j + (candidates / 2)] <= highIndex && range[j + (candidates / 2)] >= lowIndex) {
-                        bracket2[tracker] = range[j + (candidates / 2)];
-                        tracker++;
-                    }
-                }
-                if (maxInRange(bracket1, lowIndex, highIndex) >= (maxInRange(bracket2, lowIndex, highIndex))) {
-                    return maxInRange(bracket1, lowIndex, highIndex);
-                } else return maxInRange(bracket2, lowIndex, highIndex);
+
+            System.out.println("There are no numbers in range.");
+            return -2147483648;
+        }
+        if (range.length == 1) {
+            return range[0];
+        }
+        int candidates = 0;
+        for (int i = 0; i < range.length; i++) {
+            if (range[i] <= highIndex && range[i] >= lowIndex) {
+                candidates++;
             }
         }
+        if (candidates == 2) {
+            int[] bracket = new int[2];
+            int tracker = 0;
+            for (int i = 0; i < range.length; i++) {
+                if (range[i] <= highIndex && range[i] >= lowIndex) {
+                    bracket[tracker] = range[i];
+                    tracker++;
+                }
+            }
+            int winnerof2 = 0;
+            if (bracket[0] >= bracket[1]) {
+                winnerof2 = bracket[0];
+            } else {
+                winnerof2 = bracket[1];
+            }
+            return winnerof2;
+        }
+        if ((candidates % 2) == 0) {
+            int[] bracket1 = new int[(candidates / 2)];
+            int[] bracket2 = new int[(candidates / 2)];
+            int howFarDidWTraverseThroughRange = 0;
+            int tracker = 0;
+            while (tracker < (candidates / 2)) {
+                if (range[howFarDidWTraverseThroughRange] <= highIndex && range[howFarDidWTraverseThroughRange] >= lowIndex) {
+                    bracket1[tracker] = range[howFarDidWTraverseThroughRange];
+                    tracker++;
+                }
+                howFarDidWTraverseThroughRange++;
+            }
+
+            tracker = 0;
+            while (tracker < (candidates / 2)) {
+                if (range[howFarDidWTraverseThroughRange] <= highIndex && range[howFarDidWTraverseThroughRange] >= lowIndex) {
+                    bracket2[tracker] = range[howFarDidWTraverseThroughRange];
+                    tracker++;
+                }
+                howFarDidWTraverseThroughRange++;
+            }
+            int a = maxInRange(bracket1, lowIndex, highIndex);
+            int b = maxInRange(bracket2, lowIndex, highIndex);
+            if (a >= b) {
+                return a;
+            } else return b;
+        } else {
+            int[] bracket1 = new int[(candidates / 2)];
+            int[] bracket2 = new int[((candidates / 2) + 1)];
+            int howFarDidWTraverseThroughRange = 0;
+            int tracker = 0;
+            while (tracker < (candidates / 2)) {
+                if (range[howFarDidWTraverseThroughRange] <= highIndex && range[howFarDidWTraverseThroughRange] >= lowIndex) {
+                    bracket1[tracker] = range[howFarDidWTraverseThroughRange];
+                    tracker++;
+                }
+                howFarDidWTraverseThroughRange++;
+            }
+
+            tracker = 0;
+            while (tracker < ((candidates / 2) + 1)) {
+                if (range[howFarDidWTraverseThroughRange] <= highIndex && range[howFarDidWTraverseThroughRange] >= lowIndex) {
+                    bracket2[tracker] = range[howFarDidWTraverseThroughRange];
+                    tracker++;
+                }
+                howFarDidWTraverseThroughRange++;
+            }
+            int a = maxInRange(bracket1, lowIndex, highIndex);
+            int b = maxInRange(bracket2, lowIndex, highIndex);
+            if (a >= b) {
+                return a;
+            } else return b;
+        }
+    }
 
         /*/int numberOfCandidates = 0;
         int candidateSlot = 0;
@@ -216,5 +232,5 @@ public class ChapterTwelve {
             return maxInRange(x, lowIndex, highIndex);}
     }
 /*/
-    }
 }
+
