@@ -1,5 +1,6 @@
 package com.ricktoboz.omgbugz;
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: richardtoboz
@@ -9,18 +10,9 @@ package com.ricktoboz.omgbugz;
  */
 public class ChapterTwelve {
     public static void main(String[] args) {
-        int[] test = new int[10];
-        test[0] = 347;
-        test[1] = 2;
-        test[2] = 1001;
-        test[3] = 488;
-        test[4] = 99;
-        test[5] = 13;
-        test[6] = 656;
-        test[7] = 991;
-        test[8] = 34;
-        test[9] = 111;
-        System.out.println("The max value is: " + maxInRange(test, 1, 300));
+        int[] a = letterHist("bananas");
+        for (int i = 0; i < a.length; i++)
+            System.out.println(a[i]);
     }
 
     public static int[] cloneArray(int[] a) {
@@ -180,57 +172,209 @@ public class ChapterTwelve {
         }
     }
 
-        /*/int numberOfCandidates = 0;
-        int candidateSlot = 0;
-        for (int i = 0; i < range.length; i++){
-            if (range[i] <= highIndex && range[i] >= lowIndex){numberOfCandidates++;}}
-        int[] candidates = new int[numberOfCandidates];
-        for (int i = 0; i < range.length; i++){
-            if (range[i] <= highIndex && range[i] >= lowIndex){candidates[candidateSlot] = range[i]; candidateSlot++;}}
-
-        if (candidates.length == 0){System.out.println("There are no numbers in range."); return 0;}
-        if (candidates.length == 1){return candidates[0];}
-        if (candidates.length == 2){
-            if (candidates[0] >= candidates[1]){return candidates[0];}
-            else return candidates[1];}
-        else {
-            int[] x = new int[(candidates.length/2)];
-            int[] y = new int[(candidates.length/2)];
-            for (int i = 0; i < x.length; i++){
-                x[i] = candidates[i];}
-            for (int i = 0; i < y.length; i++){
-                y[i] = candidates[i + (x.length - 1)];}
-            return maxInRange(x, )
-
-            int[] x = new int[(range.length - 2)];
-        for (int i = 0; (i + 2) < range.length; i++){
-            x[(i)] = range[(i + 2)];}
-
-        return maxInRange(x, lowIndex, highIndex);}
-}
+    public static int max(int[] a) {
+        int lowest = a[0];
+        int highest = a[0];
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] > highest) {
+                highest = a[i];
+            }
+            if (a[i] < lowest) {
+                lowest = a[i];
+            }
         }
+        return maxInRange(a, lowest, highest);
     }
 
+    public static int find(int[] a, int target) {
+        if (a.length == 0) {
+            return -1;
+        }
 
-        if (range.length == 1){
-            if (range[0] >= lowIndex && range[0] <= highIndex){return range[0];}
-            else return 0;}
+        if (a.length == 1) {
+            if (a[0] == target) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
 
-        else if (range.length == 2){
-            if (range[0] >= lowIndex && range[0] <= highIndex){
-                if (range[1] >= lowIndex && range[1] <= highIndex){
-                    if (range[0] >= range[1]){return range[0];}
-                    else return range[1];}
-                else return range[0];}
-            else return 0;}
-
-        else {
-            int[] x = new int[(range.length - 2)];
-            for (int i = 0; (i + 2) < range.length; i++){
-                x[(i)] = range[(i + 2)];}
-
-            return maxInRange(x, lowIndex, highIndex);}
+        int currentIndex = 0;
+        if (a[0] == target) {
+            return 0;
+        } else return find(a, target, 1);
     }
-/*/
+
+    public static int find(int[] a, int target, int currentIndex) {
+        if ((currentIndex) == a.length) {
+            return -1;
+        }
+
+        if (a[currentIndex] == target) {
+            return currentIndex;
+        } else return find(a, target, (currentIndex + 1));
+    }
+
+    public static int indexOfMaxInRange(int[] a, int lowIndex, int highIndex) {
+        return find(a, (maxInRange(a, lowIndex, highIndex)));
+    }
+
+    public static int[] swapElement(int[] a, int firstIndex, int secondIndex) {
+        if (firstIndex >= a.length || secondIndex >= a.length) {
+            System.out.println("One or more indexes are outside the array.");
+            return a;
+        }
+
+        int[] b = new int[a.length];
+        for (int i = 0; i < a.length; i++) {
+            if (i == firstIndex) {
+                b[i] = a[secondIndex];
+            } else if (i == secondIndex) {
+                b[i] = a[firstIndex];
+            } else {
+                b[i] = a[i];
+            }
+        }
+
+        return b;
+    }
+
+    public static int[] selectionSort(int[] a) {
+        if (a.length == 0) {
+            return a;
+        }
+
+        int lowest = a[0];
+        int highest = a[0];
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] > highest) {
+                highest = a[i];
+            }
+            if (a[i] < lowest) {
+                lowest = a[i];
+            }
+        }
+
+        int[] b = new int[a.length];
+
+        b[0] = a[indexOfMaxInRange(a, lowest, highest)];
+        for (int i = 1; i < a.length; i++) {
+            b[i] = a[indexOfMaxInRange(a, lowest, (highest - 1))];
+            highest = b[i];
+        }
+        return b;
+    }
+
+    public static int getCharacterNumericalValue(String s, int i) {
+        char c = s.charAt(i);
+        if (s.charAt(i) == 'a') {
+            return 0;
+        }
+        if (s.charAt(i) == 'b') {
+            return 1;
+        }
+        if (s.charAt(i) == 'c') {
+            return 2;
+        }
+        if (s.charAt(i) == 'd') {
+            return 3;
+        }
+        if (s.charAt(i) == 'e') {
+            return 4;
+        }
+        if (s.charAt(i) == 'f') {
+            return 5;
+        }
+        if (s.charAt(i) == 'g') {
+            return 6;
+        }
+        if (s.charAt(i) == 'h') {
+            return 7;
+        }
+        if (s.charAt(i) == 'i') {
+            return 8;
+        }
+        if (s.charAt(i) == 'j') {
+            return 9;
+        }
+        if (s.charAt(i) == 'k') {
+            return 10;
+        }
+        if (s.charAt(i) == 'l') {
+            return 11;
+        }
+        if (s.charAt(i) == 'm') {
+            return 12;
+        }
+        if (s.charAt(i) == 'n') {
+            return 13;
+        }
+        if (s.charAt(i) == 'o') {
+            return 14;
+        }
+        if (s.charAt(i) == 'p') {
+            return 15;
+        }
+        if (s.charAt(i) == 'q') {
+            return 16;
+        }
+        if (s.charAt(i) == 'r') {
+            return 17;
+        }
+        if (s.charAt(i) == 's') {
+            return 18;
+        }
+        if (s.charAt(i) == 't') {
+            return 19;
+        }
+        if (s.charAt(i) == 'u') {
+            return 20;
+        }
+        if (s.charAt(i) == 'v') {
+            return 21;
+        }
+        if (s.charAt(i) == 'w') {
+            return 22;
+        }
+        if (s.charAt(i) == 'x') {
+            return 23;
+        }
+        if (s.charAt(i) == 'y') {
+            return 24;
+        }
+        if (s.charAt(i) == 'z') {
+            return 25;
+        } else return -1;
+    }
+
+    public static int[] letterHist(String s) {
+        int[] a = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            a[getCharacterNumericalValue(s, i)]++;
+        }
+        return a;
+    }
+
 }
+
+
+
+
+
+
+    /*/    if (a.length == 1){
+            if (a[0] == target){
+                return 0;}
+            else {
+                return -1;}
+        }
+        int[] bracket1 = new int[(a.length / 2)];
+        if (a.length % 2 == 0)
+            {int[] bracket2 = new int[(a.length / 2)];}
+        else
+            {int[] bracket2 = new int[(a.length / 2) + 1];}
+
+    }
+}/*/
+
 
