@@ -1,5 +1,6 @@
 package com.ricktoboz.omgbugz;
 
+import java.lang.Character;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +11,9 @@ package com.ricktoboz.omgbugz;
  */
 public class ChapterTwelve {
     public static void main(String[] args) {
-        int[] a = letterHist("bananas");
-        for (int i = 0; i < a.length; i++)
-            System.out.println(a[i]);
+        System.out.print(canSpell("alalalalal", "lalalalala"));
+        System.out.print(canSpell("alalalalal", "lalalalal"));
+        System.out.print(canSpell("aalal", "lalalalal"));
     }
 
     public static int[] cloneArray(int[] a) {
@@ -355,7 +356,44 @@ public class ChapterTwelve {
         return a;
     }
 
+    public static boolean isDubloon(String s) {
+        int[] a = new int[1];
+        a = letterHist(s);
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != 2) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isAnagram(String one, String two) {
+        int[] a = new int[1];
+        a = letterHist(one);
+        int[] b = new int[1];
+        b = letterHist(two);
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != b[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean canSpell(String letterpool, String word) {
+        int[] a = new int[1];
+        a = letterHist(letterpool);
+        int[] b = new int[1];
+        b = letterHist(word);
+        for (int i = 0; i < a.length; i++) {
+            if (b[i] > a[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
+
 
 
 
