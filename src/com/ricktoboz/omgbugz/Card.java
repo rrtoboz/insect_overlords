@@ -7,84 +7,65 @@ package com.ricktoboz.omgbugz;
  * Time: 10:46 AM
  * To change this template use File | Settings | File Templates.
  */
-public class Card {
-
+class Card {
     int suit, rank;
 
+    static String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+    static String[] ranks = {"narf", "Ace", "2", "3", "4", "5", "6",
+            "7", "8", "9", "10", "Jack", "Queen", "King"};
+
+    /*
+     * No-argument constructor.
+     */
     public Card() {
         this.suit = 0;
         this.rank = 0;
     }
 
+    /*
+     * Constructor with arguments.
+     */
     public Card(int suit, int rank) {
         this.suit = suit;
         this.rank = rank;
     }
 
+    /*
+     * Prints a card in human-readable form.
+     */
+    public static void printCard(Card c) {
+        System.out.println(ranks[c.rank] + " of " + suits[c.suit]);
+    }
+
+    /*
+     * Return true if the cards are equivalent.
+     */
+    public static boolean sameCard(Card c1, Card c2) {
+        return (c1.suit == c2.suit && c1.rank == c2.rank);
+    }
+
+    /*
+     * Compares two cards: returns 1 if the first card is greater
+     * -1 if the seconds card is greater, and 0 if they are the equivalent.
+     */
     public static int compareCards(Card c1, Card c2) {
-        if (c1.suit > c2.suit) {
-            return 1;
-        }
-        if (c1.suit < c2.suit) {
-            return -1;
-        }
-        if (c1.rank > c2.rank) {
-            return 1;
-        }
-        if (c1.rank < c2.rank) {
-            return -1;
-        }
+
+        // first compare the suits
+        if (c1.suit > c2.suit) return 1;
+        if (c1.suit < c2.suit) return -1;
+
+        // if the suits are the same,
+        // use modulus arithmetic to rotate the ranks
+        // so that the Ace is greater than the King.
+        // WARNING: This only works with valid ranks!
+        int rank1 = (c1.rank + 11) % 13;
+        int rank2 = (c2.rank + 11) % 13;
+
+        // compare the rotated ranks
+
+        if (rank1 > rank2) return 1;
+        if (rank1 < rank2) return -1;
         return 0;
-    }
-
-    public static Card[] makeDeck() {
-        Card[] cards = new Card[52];
-        int index = 0;
-        for (int suit = 0; suit <= 3; suit++) {
-            for (int rank = 1; rank <= 13; rank++) {
-                cards[index] = new Card(suit, rank);
-                index++;
-            }
-        }
-        return cards;
-    }
-
-    public static int handScore(Card[] cards) {
-        int score = 0;
-        for (int i = 0; i < cards.length; i++) {
-            if (cards[i].rank > 10) {
-                score = (score + 10);
-            } else {
-                score = (score + cards[i].rank);
-            }
-        }
-        return score;
-    }
-
-    public static int[] suitHist(Card[] cards) {
-        int[] histogram = new int[4];
-        for (int i = 0; i < cards.length; i++) {
-            histogram[cards[i].suit]++;
-        }
-        return histogram;
-    }
-
-    public static boolean hasFlush(Card[] cards) {
-        int[] a = new int[0];
-        a = suitHist(cards);
-        if (a[0] >= 5) {
-            return true;
-        }
-        if (a[1] >= 5) {
-            return true;
-        }
-        if (a[2] >= 5) {
-            return true;
-        }
-        if (a[3] >= 5) {
-            return true;
-        }
-        return false;
     }
 }
 

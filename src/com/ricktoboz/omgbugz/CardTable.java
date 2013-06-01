@@ -1,6 +1,4 @@
-package com.ricktoboz.omgbugz;
-
-/*
+/* 
  * Example code for Think Java (http://thinkapjava.com)
  *
  * Copyright(c) 2011 Allen B. Downey
@@ -9,34 +7,40 @@ package com.ricktoboz.omgbugz;
  * @author Allen B. Downey
  */
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
+package com.ricktoboz.omgbugz;
+
+import sun.awt.image.FileImageSource;
+
+import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+
 
 public class CardTable extends Canvas {
     private Image[][] images;
     private int cardWidth, cardHeight;
 
     /*
-     * Creates a CardTable.
-     * cardset is the String name of the folder that contains the card images.
-     */
+         * Creates a CardTable.
+         * cardset is the String name of the folder that contains the card images.
+         */
     public CardTable(String cardset) {
         setBackground(new Color(0x088A4B));
 
-        // create an array of card
-        // images
+        // create an array of card images
+
         String suits = "cdhs";
         images = new Image[4][14];
         for (int suit = 0; suit <= 3; suit++) {
             for (int rank = 1; rank <= 13; rank++) {
                 char c = suits.charAt(suit);
-                String s = String.format("%s/%02d%c.gif", cardset, rank, c);
-                images[suit][rank] = new ImageIcon(s).getImage();
+                String s = String.format("com/ricktoboz/omgbugz/%s/%02d%c.gif", cardset, rank, c);
+                URL url = getClass().getClassLoader().getResource(s);
+                ImageIcon imageIcon = new ImageIcon(url);
+                images[suit][rank] = imageIcon.getImage();
             }
         }
 
