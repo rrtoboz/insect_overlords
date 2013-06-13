@@ -12,7 +12,7 @@ import com.ricktoboz.omgbugz.Card;
 public class ChapterThirteen {
 
     public static void main(String[] args) {
-        Card[] deck = new Card[0];
+    /*/    Card[] deck = new Card[0];
         deck = Card.makeDeck();
         Card[] blackJackHand = new Card[3];
         blackJackHand[0] = new Card(0, 1);
@@ -23,7 +23,7 @@ public class ChapterThirteen {
         a = Card.suitHist(deck);
         System.out.println(Card.hasFlush(blackJackHand));
         System.out.println(Card.hasFlush(deck));
-
+/*/
     }
 
 }

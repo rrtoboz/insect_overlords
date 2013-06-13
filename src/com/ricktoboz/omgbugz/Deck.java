@@ -115,7 +115,7 @@ class Deck {
      */
     public static void shuffleDeck(Deck d) {
         for (int i = 0; i < d.cards.length; i++) {
-            swapCards(d, i, ChapterTwelve.randomInt(i, (d.cards.length - 1)));
+            swapCards(d, i, ChapterTwelve.randomInt(0, (d.cards.length - 1)));
         }
     }
 
@@ -123,6 +123,9 @@ class Deck {
      * Sorts a deck from low to high.
      */
     public static void sortDeck(Deck deck) {
+        for (int i = 0; i < deck.cards.length; i++) {
+            swapCards(deck, i, indexLowestCard(deck, i, (deck.cards.length - 1)));
+        }
     }
 
     /*
@@ -130,7 +133,16 @@ class Deck {
      * including both.
      */
     public static int indexLowestCard(Deck deck, int low, int high) {
-        return 0;
+        Card thisIsTheLowestCard = deck.cards[low];
+        int thisIsTheIndexOfTheLowestCard = low;
+        for (int i = low; i < (high + 1); i++) {
+            if (Card.compareCards(thisIsTheLowestCard, deck.cards[i]) == 1) {
+                thisIsTheIndexOfTheLowestCard = i;
+                thisIsTheLowestCard = deck.cards[i];
+            }
+        }
+        return thisIsTheIndexOfTheLowestCard;
+
     }
 
     /*
