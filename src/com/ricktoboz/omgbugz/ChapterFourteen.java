@@ -16,10 +16,8 @@ public class ChapterFourteen {
     public static void main(String[] args) {
         Deck d = new Deck();
         Deck.shuffleDeck(d);
-        System.out.println(Deck.indexLowestCard(d, 0, 51));
-        System.out.println(Deck.indexLowestCard(d, 25, 51));
-        System.out.println(Deck.indexLowestCard(d, 13, 15));
-        Deck.sortDeck(d);
+        Deck e = new Deck();
+        e = Deck.recMergeSort(d);
         System.out.println("Done!");
     }
 

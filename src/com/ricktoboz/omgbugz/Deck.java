@@ -162,13 +162,68 @@ class Deck {
      * Merges two sorted decks into a new sorted deck.
      */
     public static Deck merge(Deck d1, Deck d2) {
-        return d1;
+        Deck result = new Deck(d1.cards.length + d2.cards.length);
+        int i = 0;
+        int j = 0;
+        for (int k = 0; k < result.cards.length; k++) {
+            if ((i == (d1.cards.length - 1)) && (j == (d2.cards.length - 1))) {
+            } else if (i == d1.cards.length) {
+                result.cards[k] = d2.cards[j];
+                j++;
+            } else if (j == d2.cards.length) {
+                result.cards[k] = d1.cards[i];
+                i++;
+            } else if (Card.compareCards(d1.cards[i], d2.cards[j]) == -1) {
+                result.cards[k] = d1.cards[i];
+                i++;
+            } else if (Card.compareCards(d1.cards[i], d2.cards[j]) == 1) {
+                result.cards[k] = d2.cards[j];
+                j++;
+            } else {
+                result.cards[k] = d1.cards[i];
+                i++;
+            }
+        }
+        return result;
     }
+
 
     /*
      * Sort the Deck using merge sort.
      */
     public static Deck mergeSort(Deck deck) {
-        return deck;
+        if (deck.cards.length == 0 || deck.cards.length == 1) {
+            return deck;
+        }
+        Deck a = new Deck();
+        Deck b = new Deck();
+        if (deck.cards.length % 2 == 0) {
+            a = subdeck(deck, 0, ((deck.cards.length / 2) - 1));
+            b = subdeck(deck, (deck.cards.length / 2), (deck.cards.length - 1));
+        } else {
+            a = subdeck(deck, 0, ((deck.cards.length / 2)));
+            b = subdeck(deck, ((deck.cards.length / 2) + 1), (deck.cards.length - 1));
+        }
+        sortDeck(a);
+        sortDeck(b);
+        return merge(a, b);
+    }
+
+    public static Deck recMergeSort(Deck deck) {
+        if (deck.cards.length == 0 || deck.cards.length == 1) {
+            return deck;
+        }
+        Deck a = new Deck();
+        Deck b = new Deck();
+        if (deck.cards.length % 2 == 0) {
+            a = subdeck(deck, 0, ((deck.cards.length / 2) - 1));
+            b = subdeck(deck, (deck.cards.length / 2), (deck.cards.length - 1));
+        } else {
+            a = subdeck(deck, 0, ((deck.cards.length / 2)));
+            b = subdeck(deck, ((deck.cards.length / 2) + 1), (deck.cards.length - 1));
+        }
+        a = recMergeSort(a);
+        b = recMergeSort(b);
+        return merge(a, b);
     }
 }
