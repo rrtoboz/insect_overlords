@@ -166,11 +166,15 @@ class Deck {
         int i = 0;
         int j = 0;
         for (int k = 0; k < result.cards.length; k++) {
-            if ((i == (d1.cards.length - 1)) && (j == (d2.cards.length - 1))) {
-            } else if (i == d1.cards.length) {
+            if (d1.cards.length == 0 && d2.cards.length == 0) {
+                System.out.println("No cards in either deck to be merged.");
+            }
+            //if ((i >= (d1.cards.length - 1)) && (j >= (d2.cards.length - 1))) {
+            //}
+            else if (i >= d1.cards.length) {
                 result.cards[k] = d2.cards[j];
                 j++;
-            } else if (j == d2.cards.length) {
+            } else if (j >= d2.cards.length) {
                 result.cards[k] = d1.cards[i];
                 i++;
             } else if (Card.compareCards(d1.cards[i], d2.cards[j]) == -1) {
