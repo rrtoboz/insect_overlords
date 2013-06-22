@@ -4,6 +4,9 @@ import com.ricktoboz.omgbugz.Card;
 import com.ricktoboz.omgbugz.Deck;
 import com.ricktoboz.omgbugz.ChapterTwelve;
 
+import java.lang.Comparable;
+import java.util.Arrays;
+
 /**
  * Created with IntelliJ IDEA.
  * User: richardtoboz
@@ -16,8 +19,10 @@ public class ChapterFourteen {
     public static void main(String[] args) {
         Deck d = new Deck();
         Deck.shuffleDeck(d);
+        Arrays.sort(d.cards);
         Deck e = new Deck();
-        e = Deck.recMergeSort(d);
+        //e = Deck.recMergeSort(d);
+
         System.out.println("Done!");
     }
 

@@ -161,27 +161,27 @@ class Deck {
     /*
      * Merges two sorted decks into a new sorted deck.
      */
-    public static Deck merge(Deck d1, Deck d2) {
-        Deck result = new Deck(d1.cards.length + d2.cards.length);
+    public Deck merge(Deck d1) {
+        Deck result = new Deck(d1.cards.length + cards.length);
         int i = 0;
         int j = 0;
         for (int k = 0; k < result.cards.length; k++) {
-            if (d1.cards.length == 0 && d2.cards.length == 0) {
+            if (d1.cards.length == 0 && cards.length == 0) {
                 System.out.println("No cards in either deck to be merged.");
             }
             //if ((i >= (d1.cards.length - 1)) && (j >= (d2.cards.length - 1))) {
             //}
             else if (i >= d1.cards.length) {
-                result.cards[k] = d2.cards[j];
+                result.cards[k] = cards[j];
                 j++;
-            } else if (j >= d2.cards.length) {
+            } else if (j >= cards.length) {
                 result.cards[k] = d1.cards[i];
                 i++;
-            } else if (Card.compareCards(d1.cards[i], d2.cards[j]) == -1) {
+            } else if (Card.compareCards(d1.cards[i], cards[j]) == -1) {
                 result.cards[k] = d1.cards[i];
                 i++;
-            } else if (Card.compareCards(d1.cards[i], d2.cards[j]) == 1) {
-                result.cards[k] = d2.cards[j];
+            } else if (Card.compareCards(d1.cards[i], cards[j]) == 1) {
+                result.cards[k] = cards[j];
                 j++;
             } else {
                 result.cards[k] = d1.cards[i];
@@ -195,39 +195,41 @@ class Deck {
     /*
      * Sort the Deck using merge sort.
      */
-    public static Deck mergeSort(Deck deck) {
-        if (deck.cards.length == 0 || deck.cards.length == 1) {
-            return deck;
+    public void mergeSort() {
+        if (cards.length == 0 || cards.length == 1) {
+            return;
         }
         Deck a = new Deck();
         Deck b = new Deck();
-        if (deck.cards.length % 2 == 0) {
-            a = subdeck(deck, 0, ((deck.cards.length / 2) - 1));
-            b = subdeck(deck, (deck.cards.length / 2), (deck.cards.length - 1));
+        if (cards.length % 2 == 0) {
+            a = subdeck(this, 0, ((cards.length / 2) - 1));
+            b = subdeck(this, (cards.length / 2), (cards.length - 1));
         } else {
-            a = subdeck(deck, 0, ((deck.cards.length / 2)));
-            b = subdeck(deck, ((deck.cards.length / 2) + 1), (deck.cards.length - 1));
+            a = subdeck(this, 0, ((cards.length / 2)));
+            b = subdeck(this, ((cards.length / 2) + 1), (cards.length - 1));
         }
         sortDeck(a);
         sortDeck(b);
-        return merge(a, b);
+        a = a.merge(b);
+        this.cards = a.cards;
     }
 
-    public static Deck recMergeSort(Deck deck) {
-        if (deck.cards.length == 0 || deck.cards.length == 1) {
-            return deck;
+    public void recMergeSort() {
+        if (cards.length == 0 || cards.length == 1) {
+            return;
         }
         Deck a = new Deck();
         Deck b = new Deck();
-        if (deck.cards.length % 2 == 0) {
-            a = subdeck(deck, 0, ((deck.cards.length / 2) - 1));
-            b = subdeck(deck, (deck.cards.length / 2), (deck.cards.length - 1));
+        if (cards.length % 2 == 0) {
+            a = subdeck(this, 0, ((cards.length / 2) - 1));
+            b = subdeck(this, (cards.length / 2), (cards.length - 1));
         } else {
-            a = subdeck(deck, 0, ((deck.cards.length / 2)));
-            b = subdeck(deck, ((deck.cards.length / 2) + 1), (deck.cards.length - 1));
+            a = subdeck(this, 0, ((cards.length / 2)));
+            b = subdeck(this, ((cards.length / 2) + 1), (cards.length - 1));
         }
-        a = recMergeSort(a);
-        b = recMergeSort(b);
-        return merge(a, b);
+        a.recMergeSort();
+        b.recMergeSort();
+        a = a.merge(b);
+        this.cards = a.cards;
     }
 }

@@ -35,7 +35,7 @@ public class Card2 {
 
         // check mergeSort
         Deck.shuffleDeck(deck);
-        deck = Deck.mergeSort(deck);
+        //deck = Deck.mergeSort(deck);
         checkSorted(deck);
     }
 

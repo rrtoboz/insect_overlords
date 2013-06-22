@@ -1,5 +1,7 @@
 package com.ricktoboz.omgbugz;
 
+import java.lang.Comparable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: richardtoboz
@@ -7,7 +9,7 @@ package com.ricktoboz.omgbugz;
  * Time: 10:46 AM
  * To change this template use File | Settings | File Templates.
  */
-class Card {
+class Card implements Comparable<Card> {
     int suit, rank;
 
     static String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
@@ -28,6 +30,25 @@ class Card {
     public Card(int suit, int rank) {
         this.suit = suit;
         this.rank = rank;
+    }
+
+    public int compareTo(Card c) {
+        // first compare the suits
+        if (suit > c.suit) return 1;
+        if (suit < c.suit) return -1;
+
+        // if the suits are the same,
+        // use modulus arithmetic to rotate the ranks
+        // so that the Ace is greater than the King.
+        // WARNING: This only works with valid ranks!
+        int rank1 = (rank + 11) % 13;
+        int rank2 = (c.rank + 11) % 13;
+
+        // compare the rotated ranks
+
+        if (rank1 > rank2) return 1;
+        if (rank1 < rank2) return -1;
+        return 0;
     }
 
     /*
