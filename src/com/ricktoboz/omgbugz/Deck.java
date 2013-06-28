@@ -232,4 +232,12 @@ class Deck {
         a = a.merge(b);
         this.cards = a.cards;
     }
+
+    public PokerHand deal(int n) {
+        PokerHand a = new PokerHand(n);
+        for (int i = 0; i < n; i++) {
+            a.cards[i] = this.cards[i];
+        }
+        return a;
+    }
 }

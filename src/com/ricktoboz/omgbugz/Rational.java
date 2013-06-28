@@ -27,61 +27,61 @@ public class Rational {
         Rational Timmy = new Rational();
         Timmy.numerator = 4;
         Timmy.denominator = 10;
-        Rational Jimmy = rationalAdd(Billy, Timmy);
+        Rational Jimmy = Billy.rationalAdd(Timmy);
         System.out.println(Jimmy.numerator + "/" + Jimmy.denominator);
     }
 
-    private static void printRational(Rational r) {
-        System.out.println("Your Rational is: " + r.numerator + "/" + r.denominator + ".");
+    private void printRational() {
+        System.out.println("Your Rational is: " + numerator + "/" + denominator + ".");
     }
 
-    private static void negate(Rational r) {
-        r.numerator = (r.numerator * -1);
+    private void negate() {
+        numerator = (numerator * -1);
     }
 
-    private static void invert(Rational r) {
-        int temp = r.numerator;
-        r.numerator = r.denominator;
-        r.denominator = temp;
+    private void invert() {
+        int temp = numerator;
+        numerator = denominator;
+        denominator = temp;
     }
 
-    private static double toDouble(Rational r) {
-        return ((double) r.numerator / (double) r.denominator);
+    private double toDouble() {
+        return ((double) numerator / (double) denominator);
     }
 
-    private static void reduce(Rational r) {
-        if (r.numerator == r.denominator) {
+    private void reduce() {
+        if (numerator == denominator) {
             return;
         }
-        if (r.numerator > r.denominator) {
+        if (numerator > denominator) {
         }
-        if (r.numerator == 0 || r.denominator == 0) {
+        if (numerator == 0 || denominator == 0) {
             return;
         }
-        int one = r.denominator;
-        int two = r.numerator;
+        int one = denominator;
+        int two = numerator;
         int temp = 0;
         while (two != 0) {
             temp = one;
             one = two;
             two = (temp % two);
         }
-        r.numerator = (r.numerator / one);
-        r.denominator = (r.denominator / one);
+        numerator = (numerator / one);
+        denominator = (denominator / one);
         return;
     }
 
-    private static Rational rationalAdd(Rational a, Rational b) {
-        int a1 = a.denominator;
+    private Rational rationalAdd(Rational b) {
+        int a1 = denominator;
         int b1 = b.denominator;
-        a.numerator = (a.numerator * b1);
-        a.denominator = (a.denominator * b1);
+        numerator = (numerator * b1);
+        denominator = (denominator * b1);
         b.numerator = (b.numerator * a1);
         b.denominator = (b.denominator * a1);
         Rational c = new Rational();
-        c.numerator = (a.numerator + b.numerator);
-        c.denominator = (a.denominator);
-        reduce(c);
+        c.numerator = (numerator + b.numerator);
+        c.denominator = (denominator);
+        c.reduce();
         return (c);
     }
 

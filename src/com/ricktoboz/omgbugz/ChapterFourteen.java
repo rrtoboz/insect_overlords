@@ -18,11 +18,19 @@ public class ChapterFourteen {
 
     public static void main(String[] args) {
         Deck d = new Deck();
-        Deck.shuffleDeck(d);
-        Arrays.sort(d.cards);
-        Deck e = new Deck();
-        //e = Deck.recMergeSort(d);
-
+        double hadFlush = 0;
+        double hadThree = 0;
+        for (int z = 0; z > 2000; z++)
+            Deck.shuffleDeck(d);
+        PokerHand one = d.deal(5);
+        if (one.hasFlush() == true) {
+            hadFlush++;
+        }
+        if (one.hasThreeKind() == true) {
+            hadThree++;
+        }
+        System.out.println(hadFlush / 2000 + "% had a flush.");
+        System.out.println(hadThree / 2000 + "% had three of a kind.");
         System.out.println("Done!");
     }
 
